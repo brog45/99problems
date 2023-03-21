@@ -4,6 +4,14 @@
 
 (require srfi/64)
 
+;; utility functions
+
+(define (repeat n f)
+  (when (> n 0)
+    (f)
+    (repeat (- n 1) f)))
+
+
 ;; 1. (*) Find the last box of a list. S-99-01
 
 (define (last ls)
@@ -453,15 +461,41 @@
     [(> i k) (reverse (from-to k i))]))
 
 (test-begin "S-99-22")
-(test-equal '(1)
-            (from-to 1 1))
-(test-equal '(1 2 3)
-            (from-to 1 3))
-(test-equal '(3 2 1)
-            (from-to 3 1))
+(test-equal '(1) (from-to 1 1))
+(test-equal '(1 2 3) (from-to 1 3))
+(test-equal '(3 2 1) (from-to 3 1))
 (test-end "S-99-22")
 
 ;;    (**) Extract a given number of randomly selected elements from a list. S-99-23
+;; Example:
+;;   (rnd-select '(a b c d e f g h) 3)
+;;   => (e d a)
+
+(define (random-select-no xs k)
+  (cond
+    [(= k 0) '()]
+    [(empty? xs) '()]
+    [else
+     (let ([n (+ 1 (random k))])
+       (cons (kth n xs)
+             (random-select-no (remove-at xs n) (- k 1))))]))
+
+(test-begin "S-99-23")
+(test-equal '() (random-select-no '() 3))
+(test-equal '() (random-select-no '(a b) 0))
+(test-equal 1 (length (random-select-no '(a b) 1)))
+(repeat 100
+        (lambda ()
+          (test-assert
+           (member (random-select-no '(a b) 2)
+                   '((a b) (b a))))))
+(test-assert (<= (length
+                  (dedup
+                   (map (lambda _ (random-select-no '(a b) 2))
+                        (range 0 20))))
+                 20))
+(test-end)
+
 ;;    (*) Lotto: Draw N different random numbers from the set 1..M. S-99-24
 ;;    (*) Generate a random permutation of the elements of a list. S-99-25
 ;;    (**) Generate the combinations of K distinct objects chosen from the N elements of a list S-99-26
