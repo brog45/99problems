@@ -476,7 +476,7 @@
     [(= k 0) '()]
     [(empty? xs) '()]
     [else
-     (let ([n (+ 1 (random k))])
+     (let ([n (+ 1 (random (length xs)))])
        (cons (kth n xs)
              (random-select-no (remove-at xs n) (- k 1))))]))
 
