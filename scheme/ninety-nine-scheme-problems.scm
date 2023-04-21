@@ -503,6 +503,11 @@
     (random-select-no num-set n)))
 
 ;;    (*) Generate a random permutation of the elements of a list. S-99-25
+
+(define (random-permutation xs)
+  (let [(n (length xs))]
+    (random-select-no xs n)))
+
 ;;    (**) Generate the combinations of K distinct objects chosen from the N elements of a list S-99-26
 ;;    (**) Group the elements of a set into disjoint subsets. S-99-27
 ;;    (**) Sorting a list of lists according to length of sublists S-99-28
