@@ -497,6 +497,11 @@
 (test-end)
 
 ;;    (*) Lotto: Draw N different random numbers from the set 1..M. S-99-24
+
+(define (pick-numbers m n)
+  (let [(num-set (from-to 1 m))]
+    (random-select-no num-set n)))
+
 ;;    (*) Generate a random permutation of the elements of a list. S-99-25
 ;;    (**) Generate the combinations of K distinct objects chosen from the N elements of a list S-99-26
 ;;    (**) Group the elements of a set into disjoint subsets. S-99-27
