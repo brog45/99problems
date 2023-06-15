@@ -1,10 +1,30 @@
-#lang scheme
+#lang r6rs
 
 ;; http://community.schemewiki.org/?ninety-nine-scheme-problems
 
-(require srfi/64)
+(import (rnrs (6))
+;        (rnrs lists (6))
+;        (rnrs base (6))
+;        (rnrs io simple (6))
+        (srfi :64)
+        (srfi :27))
 
-;; utility functions
+;; utility functions for converting #lang racket to #lang r6rs
+
+(define (swap-args f)
+  (lambda (a b)
+    (f b a)))
+(define (foldl reducer accumulater ls)
+  (fold-left (swap-args reducer) accumulater ls))
+(define foldr fold-right)
+(define empty? null?)
+(define modulo mod)
+(define random random-integer)
+
+(define (range a b)
+  (if (>= a b)
+      '()
+      (cons a (range (+ a 1) b))))
 
 (define (repeat n f)
   (when (> n 0)
@@ -65,6 +85,7 @@
 
 (test-begin "S-99-04")
 (test-eq 0 (len '()))
+(test-eq 1 (len '(17)))
 (test-eq 1 (len '(a)))
 (test-eq 2 (len '(a b)))
 (test-end "S-99-04")
