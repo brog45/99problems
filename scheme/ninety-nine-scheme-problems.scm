@@ -1,4 +1,4 @@
-#lang r6rs
+#!r6rs
 
 ;; http://community.schemewiki.org/?ninety-nine-scheme-problems
 
