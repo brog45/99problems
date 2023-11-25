@@ -1,7 +1,13 @@
-# vim: syntax=prolog
+# vim: syntax=prolog et ts=4 sw=4 ai
 
 my_last(X, [X]).
 my_last(X, [_|T]) :- my_last(X, T).
+
+:- begin_tests(p1_1).
+    test(one) :- my_last(1, [1]).
+    test(two) :- my_last(2, [1, 2]).
+    test(three) :- my_last(3, [1, 2, 3]).
+:- end_tests(p1_1).
 
 second_last(X, [X,_]).
 second_last(X, [_|T]) :- second_last(X, T).
