@@ -22,7 +22,7 @@ rev(L,[H|T]) :- rev(T,T2), append([T2, [H]], L).
 palindrome(L) :- reverse(L, L).
 
 my_flatten([], []).
-my_flatten([H|T], L) :- is_list(H), my_flatten(H, H2), my_flatten(T, T2), lists:append(H2, T2, L).
+my_flatten([H|T], L) :- is_list(H), my_flatten(H, H2), my_flatten(T, T2), append(H2, T2, L).
 my_flatten([H|T], [H|T2]) :-  not(is_list(H)), my_flatten(T, T2).
 
 compress([], []).
@@ -362,7 +362,6 @@ prime_factors(N, [F|Fs]) :-
 %     L = [[3,2],[5,1],[7,1]]
 %
 %     Hint: The solution of problem 1.10 may be helpful.
-:- ensure_loaded('lists.pro').
 flip_encoded([],[]).
 flip_encoded([[A,B]|Xs], [[B,A]|Ys]) :- flip_encoded(Xs, Ys).
 prime_factors_mult(N, L) :-
