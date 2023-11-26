@@ -13,6 +13,13 @@ my_last(X, [_|T]) :- my_last(X, T).
 second_last(X, [X,_]).
 second_last(X, [_|T]) :- second_last(X, T).
 
+:- begin_tests(p1_2).
+    test(none, fail) :- second_last(_, []).
+    test(one, fail) :- second_last(_, [1]).
+    test(two) :- second_last(1, [1, 2]).
+    test(three) :- second_last(2, [1, 2, 3]).
+:- end_tests(p1_2).
+
 element_at(_, _, I) :- I < 1, !, fail.
 element_at(_, [], _) :- !, fail.
 element_at(_, L, I) :- length(L, LL), I > LL, !, fail.
