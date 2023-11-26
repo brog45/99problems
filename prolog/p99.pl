@@ -4,6 +4,7 @@ my_last(X, [X]).
 my_last(X, [_|T]) :- my_last(X, T).
 
 :- begin_tests(p1_1).
+    test(none, fail) :- my_last(_, []).
     test(one) :- my_last(1, [1]).
     test(two) :- my_last(2, [1, 2]).
     test(three) :- my_last(3, [1, 2, 3]).
