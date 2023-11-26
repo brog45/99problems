@@ -1,4 +1,4 @@
-# vim: syntax=prolog et ts=4 sw=4 ai
+% vim: syntax=prolog et ts=4 sw=4 ai
 
 my_last(X, [X]).
 my_last(X, [_|T]) :- my_last(X, T).
