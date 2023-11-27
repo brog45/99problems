@@ -26,6 +26,16 @@ element_at(_, L, I) :- length(L, LL), I > LL, !, fail.
 element_at(X, [X|_], 1).
 element_at(X, [_|T], I) :- J is I - 1, element_at(X, T, J).
 
+:- begin_tests(p1_3).
+    test(zero_of_one, fail) :- element_at(_, [1], 0).
+    test(one_of_zero, fail) :- element_at(_, [], 1).
+    test(three_of_two, fail) :- element_at(_, [1,2], 3).
+    test(one_of_one, true(X == a)) :- element_at(X, [a], 1).
+    test(one_of_two, true(X == a)) :- element_at(X, [a,b], 1).
+    test(two_of_two, true(X == b)) :- element_at(X, [a,b], 2).
+    test(three_of_four, true(X == c)) :- element_at(X, [a,b,c,d], 3).
+:- end_tests(p1_3).
+
 elements_in(0,[]).
 elements_in(X,[_|T]) :- elements_in(N,T), X is N + 1.
 
