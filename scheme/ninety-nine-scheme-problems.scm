@@ -530,6 +530,10 @@
     (random-select-no xs n)))
 
 ;;    (**) Generate the combinations of K distinct objects chosen from the N elements of a list S-99-26
+;; Example:
+;;  (combination 3 '(a b c d)) 
+;;    => ((b c d) (a c d) (a b d) (a b c)) 
+
 ;;    (**) Group the elements of a set into disjoint subsets. S-99-27
 ;;    (**) Sorting a list of lists according to length of sublists S-99-28
 ;;    (**) Determine whether a given integer number is prime. S-99-31
