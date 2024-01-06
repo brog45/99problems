@@ -523,11 +523,31 @@
   (let [(num-set (from-to 1 m))]
     (random-select-no num-set n)))
 
+(test-begin "S-99-24")
+(test-equal '() (pick-numbers 1 0))
+(test-equal '(1) (pick-numbers 1 1))
+(repeat 100
+        (lambda ()
+          (test-assert
+           (member (pick-numbers 3 2)
+                   '((1 2) (1 3) (2 1) (2 3) (3 1) (3 2))))))
+(test-end)
+
 ;;    (*) Generate a random permutation of the elements of a list. S-99-25
 
 (define (random-permutation xs)
   (let [(n (length xs))]
     (random-select-no xs n)))
+
+(test-begin "S-99-25")
+(test-equal '() (random-permutation '()))
+(test-equal '(1) (random-permutation '(1)))
+(repeat 100
+        (lambda ()
+          (test-assert
+           (member (random-permutation '(1 2))
+                   '((1 2) (2 1))))))
+(test-end)
 
 ;;    (**) Generate the combinations of K distinct objects chosen from the N elements of a list S-99-26
 ;; Example:
