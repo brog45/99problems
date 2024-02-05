@@ -552,13 +552,87 @@
 ;;    (**) Generate the combinations of K distinct objects chosen from the N elements of a list S-99-26
 ;; Example:
 ;;  (combination 3 '(a b c d)) 
-;;    => ((b c d) (a c d) (a b d) (a b c)) 
+;;  ; => ((b c d) (a c d) (a b d) (a b c)) 
+
 
 ;;    (**) Group the elements of a set into disjoint subsets. S-99-27
+;; a) In how many ways can a group of 9 people work in 3 disjoint subgroups of 2, 3 and 4 persons? Write a function that generates all the possibilities and returns them in a list.
+;;
+;;    Example:
+;;
+;;     (group3 '(aldo beat carla david evi flip gary hugo ida)) 
+;;     ; => ( ( (ALDO BEAT) (CARLA DAVID EVI) (FLIP GARY HUGO IDA) ) 
+;;            ... )
+;;
+;; b) Generalize the above predicate in a way that we can specify a list of group sizes and the predicate will return a list of groups.
+;;
+;;    Example:
+;;
+;;     (group '(aldo beat carla david evi flip gary hugo ida) '(2 2 5)) 
+;;     ; => ( ( (ALDO BEAT) (CARLA DAVID) (EVI FLIP GARY HUGO IDA) ) 
+;;          ... ) 
+
+
 ;;    (**) Sorting a list of lists according to length of sublists S-99-28
+;; a) We suppose that a list contains elements that are lists themselves. The
+;; objective is to sort the elements of this list according to their length. E.g.
+;; short lists first, longer lists later, or vice versa.
+;; 
+;; Example:
+;; 
+;;   (lsort '((a b c) (d e) (f g h) (d e) (i j k l) (m n) (o))) 
+;;   ; => ((O) (D E) (D E) (M N) (A B C) (F G H) (I J K L)) 
+;; 
+;; b) Again, we suppose that a list contains elements that are lists themselves.
+;; But this time the objective is to sort the elements of this list according to
+;; their length frequency; i.e., in the default, where sorting is done
+;; ascendingly, lists with rare lengths are placed first, others with a more
+;; frequent length come later.
+;; 
+;; Example:
+;; 
+;;   (lfsort '((a b c) (d e) (f g h) (d e) (i j k l) (m n) (o))) 
+;;   ; => ((i j k l) (o) (a b c) (f g h) (d e) (d e) (m n)) 
+;; 
+;; Note that in the above example, the first two lists in the result have length 4
+;; and 1, both lengths appear just once. The third and forth list have length 3
+;; which appears twice (there are two list of this length). And finally, the last
+;; three lists have length 2. This is the most frequent length. 
+
+
 ;;    (**) Determine whether a given integer number is prime. S-99-31
+;; Examples:
+;;   (prime? 3)
+;;   ; => #t
+;;   (prime? 4)
+;;   ; => #f
+
+
 ;;    (**) Determine the greatest common divisor of two positive integer numbers. S-99-32
+;; Examples:
+;;
+;;   (gcd 3 5)
+;;   ; => 1
+;;   (gcd 4 6)
+;;   ; => 2
+;;   (gcd 4 9)
+;;   ; => 1
+
+
 ;;    (*) Determine whether two positive integer numbers are coprime. S-99-33
+;; Two integers are coprime if the only divisor of both is 1.
+;; You can use the greatest common divisor solution from previous problem.
+;;
+;; Examples:
+;;
+;;   (coprime? 3 5)
+;;   ; => #t
+;;   (coprime? 4 6)
+;;   ; => #f
+;;   (coprime? 4 9)
+;;   ; => #t
+
+
 ;;    (**) Calculate Euler's totient function phi(m). S-99-34
 ;;    (**) Determine the prime factors of a given positive integer. S-99-35
 ;;    (**) Determine the prime factors of a given positive integer (2). S-99-36
