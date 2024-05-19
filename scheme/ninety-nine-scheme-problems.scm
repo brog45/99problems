@@ -554,6 +554,26 @@
 ;;  (combination 3 '(a b c d)) 
 ;;  ; => ((b c d) (a c d) (a b d) (a b c)) 
 
+(define (combination k xs)
+  (cond
+    [(< k 1) #f]
+    [(empty? xs) '()]
+    [(= k 1) (map list xs)]
+    [else (append
+              (map (lambda (l) (cons (car xs) l))
+               (combination (- k 1) (cdr xs)))
+              (combination k (cdr xs)))]))
+
+(test-begin "S-99-26")
+(test-equal '() (combination 1 '()))
+(test-equal '() (combination 2 '()))
+(test-equal '((a) (b) (c)) (combination 1 '(a b c)))
+(test-equal '((a b) (a c) (b c)) (combination 2 '(a b c)))
+(test-equal '((a b c) (a b d) (a c d) (b c d))
+            (combination 3 '(a b c d)))
+(test-equal '((a b c d))
+            (combination 4 '(a b c d)))
+(test-end)
 
 ;;    (**) Group the elements of a set into disjoint subsets. S-99-27
 ;; a) In how many ways can a group of 9 people work in 3 disjoint subgroups of 2, 3 and 4 persons? Write a function that generates all the possibilities and returns them in a list.
